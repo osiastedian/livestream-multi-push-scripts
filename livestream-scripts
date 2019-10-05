@@ -1,0 +1,12 @@
+docker run --rm -p 1935:1935 -p 8080:8080 jasonrivers/nginx-rtmp
+
+ffplay -window_title "mystream" -i rtmp://127.0.0.1:1935/live/mystream
+
+ffmpeg -re -i "Spider-Man.Far.From.Home.2019.1080p.BluRay.x264-[YTS.LT].mp4" -vcodec libx264 -profile:v main -preset:v medium -r 30 -g 30 -keyint_min 30 -sc_threshold 0 -b 4000k -minrate 4000k -maxrate 4000k -bufsize 1835k  -acodec aac -b:a 96k -ar 48000 -ac 2 -f flv -f flv "rtmps://live-api-s.facebook.com:443/rtmp/2989308081088768?s_bl=1&s_ps=1&s_sml=3&s_sw=0&s_vt=api-s&a=AbwlzY94kvzJWtbn"
+
+
+ffmpeg -re -i "rtmp://127.0.0.1:1935/live/mystream" -vcodec libx264 -profile:v main -preset:v medium -r 30 -g 30 -keyint_min 30 -sc_threshold 0 -b 4000k -minrate 4000k -maxrate 4000k -bufsize 1835k  -acodec aac -b:a 96k -ar 48000 -ac 2 -f flv -f flv "rtmps://live-api-s.facebook.com:443/rtmp/2989308081088768?s_bl=1&s_ps=1&s_sml=3&s_sw=0&s_vt=api-s&a=AbwlzY94kvzJWtbn"
+
+ffmpeg -re -i "rtmp://127.0.0.1:1935/live/mystream" -vcodec libx264 -profile:v main -preset:v medium -r 30 -g 30 -keyint_min 30 -sc_threshold 0 -b 4000k -minrate 4000k -maxrate 4000k -bufsize 1835k  -acodec aac -b:a 96k -ar 48000 -ac 2 -f flv -f flv "rtmp://127.0.0.1:1935/live/mystream3"
+
+docker container run --rm jrottenberg/ffmpeg:4.2-alpine -re -i "rtmp://192.168.1.13:1935/live/mystream" -vcodec libx264 -profile:v main -preset:v medium -r 30 -g 30 -keyint_min 30 -sc_threshold 0 -b 4000k -minrate 4000k -maxrate 4000k -bufsize 1835k  -acodec aac -b:a 96k -ar 48000 -ac 2 -f flv -f flv "rtmp://192.168.1.13:1935/live/mystream3"
